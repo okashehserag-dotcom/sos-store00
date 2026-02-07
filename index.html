@@ -1,30 +1,170 @@
-@media (max-width: 520px){
-  .container{ padding: 12px !important; }
-  header.topbar{ position: sticky; top: 0; z-index: 50; }
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Serag Store</title>
 
-  .topbar .row{
-    flex-wrap: wrap !important;
-    gap: 10px !important;
-    align-items: center !important;
-    justify-content: center !important;
+  <style>
+    body{
+      margin:0;
+      font-family:Tahoma;
+      background:#0b0f19;
+      color:white;
+      text-align:center;
+    }
+
+    header{
+      padding:20px;
+      background:#111827;
+      border-bottom:1px solid #222;
+    }
+
+    h1{
+      margin:0;
+      font-size:28px;
+    }
+
+    .search{
+      margin:20px auto;
+      width:90%;
+      max-width:400px;
+      padding:10px;
+      border-radius:10px;
+      border:none;
+      outline:none;
+      font-size:16px;
+    }
+
+    .grid{
+      display:grid;
+      grid-template-columns:repeat(auto-fit,minmax(250px,1fr));
+      gap:15px;
+      padding:20px;
+    }
+
+    .card{
+      background:#111827;
+      padding:15px;
+      border-radius:15px;
+      border:1px solid #222;
+      text-align:right;
+    }
+
+    .card h3{
+      margin:0;
+      font-size:18px;
+    }
+
+    .card p{
+      color:#aaa;
+      font-size:14px;
+    }
+
+    button{
+      width:100%;
+      padding:10px;
+      margin-top:10px;
+      border:none;
+      border-radius:10px;
+      cursor:pointer;
+      font-weight:bold;
+      background:#5aa7ff;
+      color:black;
+    }
+
+    button:hover{
+      opacity:0.8;
+    }
+
+    .cart{
+      position:fixed;
+      bottom:0;
+      left:0;
+      right:0;
+      background:#111827;
+      padding:15px;
+      border-top:1px solid #333;
+    }
+
+    .msg{
+      width:100%;
+      height:120px;
+      margin-top:10px;
+      border-radius:10px;
+      padding:10px;
+      border:none;
+      outline:none;
+      font-family:monospace;
+    }
+  </style>
+</head>
+
+<body>
+
+<header>
+  <h1>🕯️ Serag Store</h1>
+  <p>متجر خدمات رقمية برسالة طلب جاهزة</p>
+</header>
+
+<input class="search" id="search" placeholder="ابحث عن خدمة...">
+
+<div class="grid" id="services"></div>
+
+<div class="cart">
+  <h3>🛒 السلة: <span id="count">0</span></h3>
+  <button onclick="buildMessage()">تجهيز رسالة الطلب</button>
+  <textarea class="msg" id="message" placeholder="رسالة الطلب ستظهر هنا..."></textarea>
+</div>
+
+<script>
+  const servicesData = [
+    {name:"شحن UC PUBG", price:12, req:"Player ID + الباقة"},
+    {name:"متابعين انستغرام", price:5, req:"رابط الحساب"},
+    {name:"اشتراك Netflix", price:10, req:"الخطة + المدة"},
+    {name:"تصميم شعار Logo", price:25, req:"اسم المشروع + الألوان"},
+  ];
+
+  let cart = [];
+
+  function renderServices(list){
+    const grid = document.getElementById("services");
+    grid.innerHTML="";
+    list.forEach((s,i)=>{
+      grid.innerHTML += `
+        <div class="card">
+          <h3>${s.name}</h3>
+          <p>السعر: $${s.price}</p>
+          <p>المطلوب: ${s.req}</p>
+          <button onclick="addToCart(${i})">إضافة للسلة</button>
+        </div>
+      `;
+    });
   }
 
-  .brand{
-    width: 100% !important;
-    justify-content: center !important;
-    text-align: center !important;
+  function addToCart(i){
+    cart.push(servicesData[i]);
+    document.getElementById("count").innerText = cart.length;
+    alert("تمت الإضافة ✅");
   }
 
-  .nav-actions{
-    width: 100% !important;
-    justify-content: center !important;
-    flex-wrap: wrap !important;
+  function buildMessage(){
+    let msg="🕯️ طلب جديد من Serag Store\n\n";
+    cart.forEach((s,idx)=>{
+      msg += `${idx+1}) ${s.name} - $${s.price}\n   المطلوب: ${s.req}\n\n`;
+    });
+    msg += "📩 الرجاء إرسال التفاصيل المطلوبة لإتمام الطلب.";
+    document.getElementById("message").value=msg;
   }
 
-  .search{
-    width: 100% !important;
-  }
+  document.getElementById("search").addEventListener("input",(e)=>{
+    const q=e.target.value.toLowerCase();
+    const filtered = servicesData.filter(s=>s.name.toLowerCase().includes(q));
+    renderServices(filtered);
+  });
 
-  .hero{ padding: 14px 0 !important; }
-  h1{ font-size: 28px !important; }
-}
+  renderServices(servicesData);
+</script>
+
+</body>
+</html>
