@@ -1,248 +1,340 @@
 <!doctype html>
-<html lang="ar" dir="rtl" data-theme="beige">
+<html lang="ar" dir="rtl">
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <meta name="theme-color" content="#E7D9C4" />
-  <meta name="color-scheme" content="light dark" />
-  <meta name="description" content="SOS STORE — واجهة متجر جاهزة للتعبئة" />
-
-  <title>SOS STORE</title>
-
+  <meta name="theme-color" content="#0ea5e9" />
+  <title>Serag Store | متجر خدمات إلكترونية</title>
+  <meta name="description" content="Serag Store متجر خدمات إلكترونية: شحن ألعاب، اشتراكات، تصميم، تحويل رصيد، وخدمات رقمية أخرى." />
   <link rel="stylesheet" href="style.css" />
-  <script src="script.js" defer></script>
 </head>
+
 <body>
-  <a class="skip" href="#main">تخطي إلى المحتوى</a>
+  <a class="skip-link" href="#main">تخطي إلى المحتوى</a>
 
-  <noscript>
-    <div class="noscript">هذا الموقع يحتاج تشغيل JavaScript لعرض المنتجات والسلة والمفضلة.</div>
-  </noscript>
-
-  <header class="header" id="top">
-    <div class="container header__inner">
-      <a class="brand" href="#top" aria-label="الرجوع لأعلى الصفحة">
-        <span class="brand__mark" aria-hidden="true"></span>
-        <span class="brand__text">
-          <span class="brand__title">SOS STORE</span>
-          <span class="brand__sub">Luxury • Smooth • Mobile First</span>
-        </span>
-      </a>
-
-      <nav class="header__actions" aria-label="أزرار سريعة">
-        <button class="iconBtn" id="themeBtn" type="button" aria-label="تغيير الثيم">◐</button>
-        <button class="iconBtn" id="wishBtn" type="button" aria-label="فتح المفضلة" aria-controls="wishDrawer" aria-expanded="false">
-          ♥ <span class="badge" id="wishCount" aria-live="polite">0</span>
-        </button>
-        <button class="iconBtn" id="cartBtn" type="button" aria-label="فتح سلة المشتريات" aria-controls="cartDrawer" aria-expanded="false">
-          🛒 <span class="badge" id="cartCount" aria-live="polite">0</span>
-        </button>
-      </nav>
-    </div>
-
-    <div class="container controlbar" aria-label="شريط التحكم">
-      <div class="controlbar__left">
-        <div class="search" role="search">
-          <label class="srOnly" for="globalSearch">بحث</label>
-          <input id="globalSearch" class="input input--search" type="search" placeholder="ابحث عن منتج..." autocomplete="off" />
-          <button class="iconBtn iconBtn--mini" id="searchClear" type="button" aria-label="مسح البحث">✕</button>
-        </div>
-
-        <div class="field">
-          <label class="srOnly" for="tagSelect">فلترة</label>
-          <select class="select" id="tagSelect" aria-label="فلترة حسب الوسم">
-            <option value="all">الكل</option>
-          </select>
-        </div>
-
-        <div class="field">
-          <label class="srOnly" for="sortSelect">ترتيب</label>
-          <select class="select" id="sortSelect" aria-label="ترتيب النتائج">
-            <option value="featured">الأبرز</option>
-            <option value="newest">الأحدث</option>
-            <option value="priceLow">السعر: الأقل</option>
-            <option value="priceHigh">السعر: الأعلى</option>
-            <option value="nameAZ">الاسم: أ-ي</option>
-          </select>
+  <header class="site-header">
+    <div class="container header-inner">
+      <div class="brand">
+        <div class="logo" aria-hidden="true">S</div>
+        <div class="brand-text">
+          <h1 class="brand-name">Serag Store</h1>
+          <p class="brand-tag">متجر خدمات إلكترونية</p>
         </div>
       </div>
 
-      <div class="controlbar__right">
-        <button class="btn btn--ghost btn--sm" id="resetBtn" type="button">إعادة ضبط</button>
-        <a class="btn btn--primary btn--sm" href="#collections">الأقسام</a>
+      <nav class="nav" aria-label="التنقل الرئيسي">
+        <button class="nav-toggle" id="navToggle" aria-expanded="false" aria-controls="navMenu">
+          <span class="sr-only">فتح/إغلاق القائمة</span>
+          ☰
+        </button>
+        <ul class="nav-menu" id="navMenu">
+          <li><a href="#services">الخدمات</a></li>
+          <li><a href="#how">طريقة الطلب</a></li>
+          <li><a href="#faq">الأسئلة</a></li>
+          <li><a href="#contact">تواصل</a></li>
+        </ul>
+      </nav>
+
+      <div class="header-actions">
+        <button class="btn ghost" id="openCartBtn" type="button">
+          السلة <span class="badge" id="cartCount" aria-label="عدد العناصر">0</span>
+        </button>
+        <button class="btn primary" id="openCheckoutBtn" type="button">إتمام الطلب</button>
       </div>
     </div>
   </header>
 
-  <main id="main" tabindex="-1">
-    <section class="hero" aria-label="مقدمة">
-      <div class="container hero__inner">
-        <div class="hero__card reveal">
-          <div class="hero__eyebrow">واجهة متجر عالمية — جاهزة للتعبئة</div>
-          <h1 class="hero__title">تجربة فخمة، أنيميشن ناعمة، وميزات كثيرة بدون تعقيد</h1>
-          <p class="hero__desc">لايك + تعليقات لكل منتج + سلة + مفضلة + بحث قوي + فلترة + ثيمات.</p>
-          <div class="hero__actions">
-            <a class="btn btn--primary" href="#products">تسوق الآن</a>
-            <a class="btn btn--ghost" href="#collections">الأقسام</a>
+  <main id="main">
+    <section class="hero">
+      <div class="container hero-grid">
+        <div class="hero-copy">
+          <p class="pill">✅ سرعة تنفيذ • 🔒 دفع آمن • 📩 دعم سريع</p>
+          <h2>كل خدماتك الرقمية بمكان واحد</h2>
+          <p class="lead">
+            اختر الخدمة، حدّد التفاصيل، وأرسل الطلب مباشرة. المتجر مصمم لخدمات مثل: شحن الألعاب،
+            الاشتراكات، تصميمات السوشيال، تحويل رصيد، وخدمات رقمية أخرى.
+          </p>
+
+          <div class="hero-actions">
+            <a class="btn primary" href="#services">تصفح الخدمات</a>
+            <button class="btn ghost" id="scrollHow" type="button">كيف أطلب؟</button>
+          </div>
+
+          <div class="trust">
+            <div class="trust-item">
+              <strong id="ordersCounter">0</strong>
+              <span>طلبات تمّت</span>
+            </div>
+            <div class="trust-item">
+              <strong>24/7</strong>
+              <span>دعم</span>
+            </div>
+            <div class="trust-item">
+              <strong>+10</strong>
+              <span>خدمات</span>
+            </div>
           </div>
         </div>
 
-        <div class="hero__art reveal" aria-hidden="true">
-          <div class="artCard"></div>
-          <div class="artCard artCard--b"></div>
-          <div class="artCard artCard--c"></div>
-        </div>
-      </div>
-    </section>
-
-    <section id="collections" class="section" aria-label="الأقسام">
-      <div class="container">
-        <div class="section__head reveal">
-          <h2 class="section__title">الأقسام</h2>
-          <p class="section__sub">عرض أفقي بطابقين. افتح أي قسم.</p>
-        </div>
-
-        <div class="collections2" id="collectionsGrid" aria-live="polite"></div>
-      </div>
-    </section>
-
-    <section id="products" class="section" aria-label="المنتجات">
-      <div class="container">
-        <div class="section__head reveal">
-          <h2 class="section__title">كل المنتجات</h2>
-          <p class="section__sub">شبكة مرتبة. كل منتج فيه إعجاب + تعليق + إضافة للسلة.</p>
-        </div>
-
-        <div class="grid reveal" id="productsGrid" aria-live="polite"></div>
-
-        <div class="center">
-          <button class="btn btn--primary" id="loadMore" type="button">عرض المزيد</button>
-        </div>
-      </div>
-    </section>
-
-    <section id="contact" class="section" aria-label="تواصل">
-      <div class="container">
-        <div class="contactCard reveal">
-          <div class="section__head section__head--tight">
-            <h2 class="section__title">تواصل</h2>
-            <p class="section__sub">تحويل مباشر إلى إنستقرام</p>
+        <div class="hero-card" aria-label="بطاقة معلومات المتجر">
+          <div class="hero-card-top">
+            <h3>سلة خدمات ذكية</h3>
+            <p>أضف أكثر من خدمة، طبّق كوبون خصم، وأرسل الطلب برسالة جاهزة.</p>
           </div>
-          <a class="btn btn--primary" target="_blank" rel="noopener" href="https://instagram.com/sos_sstorre">@sos_sstorre</a>
-          <div class="muted">يفتح في تبويب جديد</div>
+
+          <div class="hero-card-stats">
+            <div class="stat">
+              <span class="stat-label">وقت التنفيذ</span>
+              <span class="stat-value">خلال ساعات</span>
+            </div>
+            <div class="stat">
+              <span class="stat-label">ضمان</span>
+              <span class="stat-value">حتى إتمام الخدمة</span>
+            </div>
+            <div class="stat">
+              <span class="stat-label">وسائل التواصل</span>
+              <span class="stat-value">واتساب/تيليجرام</span>
+            </div>
+          </div>
+
+          <div class="notice">
+            <span class="dot" aria-hidden="true"></span>
+            <p>ملاحظة: الأسعار هنا نموذجية — عدّلها من ملف <code>script.js</code>.</p>
+          </div>
         </div>
+      </div>
+    </section>
+
+    <section class="section" id="services">
+      <div class="container">
+        <div class="section-head">
+          <h3>الخدمات المتوفرة</h3>
+
+          <div class="filters">
+            <label class="field">
+              <span class="field-label">بحث</span>
+              <input id="searchInput" type="search" placeholder="ابحث عن خدمة..." autocomplete="off" />
+            </label>
+
+            <label class="field">
+              <span class="field-label">التصنيف</span>
+              <select id="categorySelect">
+                <option value="all">الكل</option>
+              </select>
+            </label>
+
+            <label class="field">
+              <span class="field-label">ترتيب</span>
+              <select id="sortSelect">
+                <option value="popular">الأكثر طلبًا</option>
+                <option value="priceAsc">الأرخص</option>
+                <option value="priceDesc">الأغلى</option>
+                <option value="nameAsc">الاسم (أ-ي)</option>
+              </select>
+            </label>
+          </div>
+        </div>
+
+        <div class="grid" id="servicesGrid" aria-live="polite"></div>
+      </div>
+    </section>
+
+    <section class="section alt" id="how">
+      <div class="container">
+        <div class="section-head">
+          <h3>طريقة الطلب</h3>
+          <p class="muted">خطوات بسيطة لإرسال طلبك بدون تعقيد.</p>
+        </div>
+
+        <ol class="steps">
+          <li>
+            <div class="step-num">1</div>
+            <div class="step-body">
+              <h4>اختر الخدمة</h4>
+              <p>من قائمة الخدمات، اضغط “إضافة للسلة”.</p>
+            </div>
+          </li>
+          <li>
+            <div class="step-num">2</div>
+            <div class="step-body">
+              <h4>أدخل تفاصيلك</h4>
+              <p>مثلاً: ID اللعبة، رابط الحساب، أو تفاصيل التصميم.</p>
+            </div>
+          </li>
+          <li>
+            <div class="step-num">3</div>
+            <div class="step-body">
+              <h4>أرسل الطلب</h4>
+              <p>من زر “إتمام الطلب” سيتم تجهيز رسالة جاهزة للإرسال.</p>
+            </div>
+          </li>
+        </ol>
+      </div>
+    </section>
+
+    <section class="section" id="faq">
+      <div class="container">
+        <div class="section-head">
+          <h3>أسئلة شائعة</h3>
+          <p class="muted">إجابات سريعة على أكثر الأسئلة تكرارًا.</p>
+        </div>
+
+        <div class="faq">
+          <details>
+            <summary>كيف أعدل الخدمات والأسعار؟</summary>
+            <p>افتح <code>script.js</code> وستجد مصفوفة <code>SERVICES</code> — عدّل الاسم/السعر/التصنيف/الوصف.</p>
+          </details>
+          <details>
+            <summary>هل يوجد كوبون خصم؟</summary>
+            <p>نعم، كوبون تجريبي: <strong>SERAG10</strong> يمنح 10% (يمكنك تغييره أو حذف ميزة الكوبونات).</p>
+          </details>
+          <details>
+            <summary>هل هذا الموقع يحتاج سيرفر؟</summary>
+            <p>لا، يعمل كصفحات ثابتة. ويمكنك لاحقًا ربطه ببوابة دفع أو لوحة إدارة.</p>
+          </details>
+        </div>
+      </div>
+    </section>
+
+    <section class="section alt" id="contact">
+      <div class="container">
+        <div class="section-head">
+          <h3>تواصل معنا</h3>
+          <p class="muted">ضع روابطك الحقيقية هنا (واتساب/تيليجرام/إنستغرام).</p>
+        </div>
+
+        <div class="contact-grid">
+          <a class="contact-card" href="#" id="whatsLink">
+            <span class="contact-ico" aria-hidden="true">📱</span>
+            <div>
+              <strong>واتساب</strong>
+              <p class="muted">اضغط لإرسال الطلب</p>
+            </div>
+          </a>
+
+          <a class="contact-card" href="#" id="tgLink">
+            <span class="contact-ico" aria-hidden="true">✈️</span>
+            <div>
+              <strong>تيليجرام</strong>
+              <p class="muted">قناة/حساب الدعم</p>
+            </div>
+          </a>
+
+          <div class="contact-card">
+            <span class="contact-ico" aria-hidden="true">🕒</span>
+            <div>
+              <strong>ساعات العمل</strong>
+              <p class="muted">يوميًا — حسب التوفر</p>
+            </div>
+          </div>
+        </div>
+
+        <footer class="footer">
+          <p>© <span id="year"></span> Serag Store — جميع الحقوق محفوظة.</p>
+        </footer>
       </div>
     </section>
   </main>
 
-  <footer class="footer">
-    <div class="container footer__inner">
-      <div>© <span id="year"></span> SOS STORE</div>
-      <a class="navLink" href="#top">أعلى</a>
-    </div>
-  </footer>
+  <!-- Cart Drawer -->
+  <aside class="drawer" id="cartDrawer" aria-hidden="true" aria-label="سلة المشتريات">
+    <div class="drawer-backdrop" id="drawerBackdrop" tabindex="-1" aria-hidden="true"></div>
 
-  <button class="toTop" id="toTop" type="button" aria-label="العودة للأعلى">↑</button>
-
-  <aside class="drawer" id="cartDrawer" aria-hidden="true" role="dialog" aria-modal="true" aria-labelledby="cartTitle">
-    <div class="drawer__overlay" data-close="cart" tabindex="-1"></div>
-    <div class="drawer__panel" role="document">
-      <div class="drawer__head">
-        <div class="drawer__title" id="cartTitle">سلة المشتريات</div>
-        <button class="iconBtn" type="button" data-close="cart" aria-label="إغلاق">✕</button>
-      </div>
-      <div class="drawer__body" id="cartItems"></div>
-      <div class="drawer__foot">
-        <div class="drawer__row">
-          <span>الإجمالي</span>
-          <strong id="cartTotal">0</strong>
-        </div>
-        <button class="btn btn--primary" id="checkoutBtn" type="button">إتمام الطلب</button>
-        <button class="btn btn--ghost" id="clearCart" type="button">تفريغ السلة</button>
-      </div>
-    </div>
-  </aside>
-
-  <aside class="drawer" id="wishDrawer" aria-hidden="true" role="dialog" aria-modal="true" aria-labelledby="wishTitle">
-    <div class="drawer__overlay" data-close="wish" tabindex="-1"></div>
-    <div class="drawer__panel" role="document">
-      <div class="drawer__head">
-        <div class="drawer__title" id="wishTitle">المفضلة</div>
-        <button class="iconBtn" type="button" data-close="wish" aria-label="إغلاق">✕</button>
-      </div>
-      <div class="drawer__body" id="wishItems"></div>
-      <div class="drawer__foot">
-        <button class="btn btn--ghost" id="clearWish" type="button">تفريغ المفضلة</button>
-      </div>
-    </div>
-  </aside>
-
-  <aside class="drawer" id="collectionDrawer" aria-hidden="true" data-color="red" role="dialog" aria-modal="true" aria-labelledby="collectionTitle">
-    <div class="drawer__overlay" data-close="collection" tabindex="-1"></div>
-    <div class="drawer__panel drawer__panel--wide" role="document">
-      <div class="drawer__head">
-        <div>
-          <div class="drawer__title" id="collectionTitle">القسم</div>
-          <div class="drawer__sub" id="collectionSub">—</div>
-        </div>
-        <button class="iconBtn" type="button" data-close="collection" aria-label="إغلاق">✕</button>
+    <div class="drawer-panel" role="dialog" aria-modal="true" aria-labelledby="cartTitle">
+      <div class="drawer-head">
+        <h3 id="cartTitle">السلة</h3>
+        <button class="icon-btn" id="closeCartBtn" type="button" aria-label="إغلاق السلة">✕</button>
       </div>
 
-      <div class="drawer__body">
-        <div class="colControls">
-          <div class="search" role="search">
-            <label class="srOnly" for="collectionSearch">بحث داخل القسم</label>
-            <input class="input input--search" id="collectionSearch" type="search" placeholder="بحث داخل القسم..." autocomplete="off" />
-            <button class="iconBtn iconBtn--mini" id="collectionClear" type="button" aria-label="مسح بحث القسم">✕</button>
+      <div class="drawer-body">
+        <div class="cart-items" id="cartItems"></div>
+
+        <div class="cart-summary">
+          <div class="row">
+            <span>المجموع</span>
+            <strong id="subTotal">0</strong>
           </div>
 
-          <div class="field">
-            <label class="srOnly" for="collectionFilter">فلترة القسم</label>
-            <select class="select" id="collectionFilter" aria-label="فلترة داخل القسم">
-              <option value="all">الكل</option>
-            </select>
+          <div class="row">
+            <span>الخصم</span>
+            <strong id="discount">0</strong>
           </div>
 
-          <div class="hint" id="colCount" aria-live="polite"></div>
-        </div>
+          <div class="row total">
+            <span>الإجمالي</span>
+            <strong id="grandTotal">0</strong>
+          </div>
 
-        <div class="collectionStage" id="collectionStage">
-          <div class="collectionGrid" id="collectionGrid" aria-live="polite"></div>
+          <div class="coupon">
+            <input id="couponInput" type="text" placeholder="كوبون (مثال: SERAG10)" autocomplete="off" />
+            <button class="btn ghost" id="applyCouponBtn" type="button">تطبيق</button>
+          </div>
+
+          <button class="btn primary full" id="checkoutBtn" type="button">إتمام الطلب</button>
+          <button class="btn ghost full" id="clearCartBtn" type="button">تفريغ السلة</button>
+
+          <p class="hint">سيتم تجهيز رسالة الطلب لتنسخها وترسلها عبر واتساب/تيليجرام.</p>
         </div>
       </div>
     </div>
   </aside>
 
-  <div class="modal" id="commentModal" aria-hidden="true" role="dialog" aria-modal="true" aria-labelledby="commentTitle">
-    <div class="modal__overlay" data-close="comment" tabindex="-1"></div>
-    <div class="modal__panel" role="document">
-      <div class="modal__head">
-        <div>
-          <div class="modal__title" id="commentTitle">تعليقات</div>
-          <div class="modal__sub" id="commentSub">—</div>
+  <!-- Checkout Modal -->
+  <div class="modal" id="checkoutModal" aria-hidden="true">
+    <div class="modal-backdrop" id="modalBackdrop"></div>
+
+    <div class="modal-panel" role="dialog" aria-modal="true" aria-labelledby="checkoutTitle">
+      <div class="modal-head">
+        <h3 id="checkoutTitle">إتمام الطلب</h3>
+        <button class="icon-btn" id="closeModalBtn" type="button" aria-label="إغلاق">✕</button>
+      </div>
+
+      <form class="modal-body" id="checkoutForm">
+        <div class="two-cols">
+          <label class="field">
+            <span class="field-label">الاسم</span>
+            <input id="custName" type="text" placeholder="اسمك" required />
+          </label>
+          <label class="field">
+            <span class="field-label">رقم التواصل</span>
+            <input id="custPhone" type="tel" placeholder="مثال: 079xxxxxxx" required />
+          </label>
         </div>
-        <button class="iconBtn" type="button" data-close="comment" aria-label="إغلاق">✕</button>
-      </div>
 
-      <div class="modal__body">
-        <form class="commentForm" id="commentForm" autocomplete="off">
-          <label class="srOnly" for="commentName">اسمك</label>
-          <input class="input" id="commentName" maxlength="22" placeholder="اسمك" required />
+        <label class="field">
+          <span class="field-label">ملاحظات / تفاصيل الخدمة</span>
+          <textarea id="custNotes" rows="4" placeholder="اكتب تفاصيل مثل ID، رابط، المطلوب..."></textarea>
+        </label>
 
-          <label class="srOnly" for="commentText">التعليق</label>
-          <input class="input" id="commentText" maxlength="140" placeholder="اكتب تعليق..." required />
+        <label class="field">
+          <span class="field-label">طريقة الإرسال</span>
+          <select id="sendVia">
+            <option value="copy">نسخ الرسالة</option>
+            <option value="whatsapp">واتساب</option>
+            <option value="telegram">تيليجرام</option>
+          </select>
+        </label>
 
-          <button class="btn btn--primary" type="submit">إرسال</button>
-        </form>
-        <div class="comments" id="commentList"></div>
-      </div>
+        <div class="message-preview">
+          <div class="row">
+            <strong>رسالة الطلب</strong>
+            <button class="btn ghost small" id="copyMsgBtn" type="button">نسخ</button>
+          </div>
+          <textarea id="orderMessage" rows="7" readonly></textarea>
+        </div>
 
-      <div class="modal__foot">
-        <button class="btn btn--ghost" id="clearComments" type="button">مسح تعليقات هذا المنتج</button>
-      </div>
+        <div class="modal-actions">
+          <button class="btn primary" type="submit">إرسال / فتح التطبيق</button>
+          <button class="btn ghost" id="saveDraftBtn" type="button">حفظ كمسودة</button>
+        </div>
+
+        <p class="hint muted">يمكنك تعديل روابط واتساب/تيليجرام من <code>script.js</code>.</p>
+      </form>
     </div>
   </div>
 
-  <div class="toast" id="toast" aria-live="polite" aria-atomic="true"></div>
+  <div class="toast" id="toast" role="status" aria-live="polite" aria-atomic="true"></div>
+
+  <script src="script.js"></script>
 </body>
 </html>
